@@ -10,5 +10,5 @@ package br.ufmt.alg3.main;
  * @author rodrigo
  */
 public class Main {
-    
+   public static void main(String[] args){} 
 }
