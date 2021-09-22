@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package br.ufmt.alg3.main;
+package br.ufmt.alg3.telas;
 
-/**
- *
- * @author rodrigo
- */
+import br.ufmt.alg3.telas.ClienteJPanel;
+
 public class TelaJFrame extends javax.swing.JFrame {
 
     /**
@@ -29,24 +22,60 @@ public class TelaJFrame extends javax.swing.JFrame {
 
         jPanelConteudo = new javax.swing.JPanel();
         jMenuBar = new javax.swing.JMenuBar();
-        jMenu = new javax.swing.JMenu();
-        jMenuItemDisciplina = new javax.swing.JMenuItem();
+        jMenuCliente = new javax.swing.JMenu();
+        jMenuItemCliente = new javax.swing.JMenuItem();
+        jMenuItemEmpresa = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanelConteudo.setLayout(new javax.swing.BoxLayout(jPanelConteudo, javax.swing.BoxLayout.LINE_AXIS));
 
-        jMenu.setText("File");
+        jMenuCliente.setText("File");
 
-        jMenuItemDisciplina.setText("Disciplina");
-        jMenuItemDisciplina.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemCliente.setText("Cliente");
+        jMenuItemCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemDisciplinaActionPerformed(evt);
+                jMenuItemClienteActionPerformed(evt);
             }
         });
-        jMenu.add(jMenuItemDisciplina);
+        jMenuCliente.add(jMenuItemCliente);
 
-        jMenuBar.add(jMenu);
+        jMenuItemEmpresa.setText("Empresa");
+        jMenuCliente.add(jMenuItemEmpresa);
+
+        jMenuItem2.setText("jMenuItem2");
+        jMenuCliente.add(jMenuItem2);
+
+        jMenuItem3.setText("jMenuItem3");
+        jMenuCliente.add(jMenuItem3);
+
+        jMenuItem4.setText("jMenuItem4");
+        jMenuCliente.add(jMenuItem4);
+
+        jMenuItem5.setText("jMenuItem5");
+        jMenuCliente.add(jMenuItem5);
+
+        jMenuItem6.setText("jMenuItem6");
+        jMenuCliente.add(jMenuItem6);
+
+        jMenuItem7.setText("jMenuItem7");
+        jMenuCliente.add(jMenuItem7);
+
+        jMenuItem8.setText("jMenuItem8");
+        jMenuCliente.add(jMenuItem8);
+
+        jMenuItem9.setText("jMenuItem9");
+        jMenuCliente.add(jMenuItem9);
+
+        jMenuBar.add(jMenuCliente);
 
         setJMenuBar(jMenuBar);
 
@@ -64,13 +93,13 @@ public class TelaJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItemDisciplinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDisciplinaActionPerformed
+    private void jMenuItemClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClienteActionPerformed
         // TODO add your handling code here:
         jPanelConteudo.removeAll();
         jPanelConteudo.add(new ClienteJPanel());
         jPanelConteudo.setVisible(false);
         jPanelConteudo.setVisible(true);
-    }//GEN-LAST:event_jMenuItemDisciplinaActionPerformed
+    }//GEN-LAST:event_jMenuItemClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -108,9 +137,18 @@ public class TelaJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu;
     private javax.swing.JMenuBar jMenuBar;
-    private javax.swing.JMenuItem jMenuItemDisciplina;
+    private javax.swing.JMenu jMenuCliente;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenuItem jMenuItemCliente;
+    private javax.swing.JMenuItem jMenuItemEmpresa;
     private javax.swing.JPanel jPanelConteudo;
     // End of variables declaration//GEN-END:variables
 }

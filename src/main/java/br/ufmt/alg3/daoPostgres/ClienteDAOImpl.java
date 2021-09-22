@@ -1,6 +1,5 @@
-package br.ufmt.alg3.dao.postgres;
+package br.ufmt.alg3.daoPostgres;
 
-import br.ufmt.alg3.dao.ClienteDAO;
 import br.ufmt.alg3.entidades.Cliente;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,8 +11,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import br.ufmt.alg3.dao.EntidadeDAO;
 
-public class ClienteDAOImpl implements ClienteDAO{
+public class ClienteDAOImpl implements EntidadeDAO{
 
     private Connection con;
     
