@@ -1,15 +1,16 @@
 package br.ufmt.alg3.entidades;
 
-public class Vendedor {
-    private int idVendedor;
+public class Atendente {
+    private int idAtendente;
+    private Empresa empresa;
     private String nome;
 
     public int getIdVendedor() {
-        return idVendedor;
+        return idAtendente;
     }
 
     public void setIdVendedor(int idVendedor) {
-        this.idVendedor = idVendedor;
+        this.idAtendente = idVendedor;
     }
 
     public String getNome() {

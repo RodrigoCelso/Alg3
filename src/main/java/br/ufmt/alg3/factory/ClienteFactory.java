@@ -4,7 +4,7 @@ import br.ufmt.alg3.daoPostgres.ClienteDAOImpl;
 import br.ufmt.alg3.dao.EntidadeDAO;
 
 public class ClienteFactory {
-    public static EntidadeDAO createDAO(String alo){
+    public static EntidadeDAO createDAO(){
         return new ClienteDAOImpl();
     }
 }
