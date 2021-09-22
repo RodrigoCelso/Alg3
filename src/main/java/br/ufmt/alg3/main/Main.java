@@ -15,9 +15,17 @@ public class Main {
     
     public static void abreConexao(){
         try {
-            con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/alg","postgres","123");
+            con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","123");
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void fechaConexao(){
+        try {
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

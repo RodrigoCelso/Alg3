@@ -16,6 +16,7 @@ public class ClienteDAOImpl implements EntidadeDAO{
     //Os métodos adicionar e atualizar estão utilizando o PreparedStatement para executar a Query ao banco
     @Override
     public void adicionar(Cliente cliente) {
+        Main.abreConexao();
         String sql = "INSERT INTO Cliente(nome,cpf,telefone) VALUES (?,?,?);";
         try {
             PreparedStatement pstm = Main.con.prepareStatement(sql);
@@ -26,6 +27,7 @@ public class ClienteDAOImpl implements EntidadeDAO{
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+        Main.fechaConexao();
     }
 
     @Override
