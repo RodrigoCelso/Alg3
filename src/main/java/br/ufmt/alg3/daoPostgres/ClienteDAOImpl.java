@@ -31,31 +31,26 @@ public class ClienteDAOImpl implements EntidadeDAO{
     }
 
     @Override
-    public void atualizar(Cliente cliente, String campo) {
-        String sql = "UPDATE Cliente SET ? = ? WHERE idCliente = ?;";
+    public void atualizar(Cliente cliente) {
+        Main.abreConexao();
+        String sql = "UPDATE Cliente SET (nome,cpf,telefone) = (?,?,?) WHERE idCliente = ?;";
         try {
             PreparedStatement pstm = Main.con.prepareStatement(sql);
-            pstm.setString(1,campo);
-            
-            //Verificar qual tipo de alteração será feita
-            if(campo.toUpperCase().equals("NOME")){
-                pstm.setString(2,cliente.getNome());
-            }else if(campo.toUpperCase().equals("CPF")){
-                pstm.setString(2,cliente.getCpf());
-            }else if(campo.toUpperCase().equals("TELEFONE")){
-                pstm.setString(2,cliente.getTelefone());
-            }
-            
-            pstm.setInt(3, cliente.getIdCliente());
+            pstm.setString(1,cliente.getNome());
+            pstm.setString(2,cliente.getCpf());
+            pstm.setString(3,cliente.getTelefone());
+            pstm.setInt(4, cliente.getIdCliente());
             pstm.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+        Main.fechaConexao();
     }
     
     //Os métodos remover e listar estão utilizando o createStatement para executar a Query ao banco
     @Override
     public boolean remover(int id) {
+        Main.abreConexao();
         String sql = "DELETE FROM Disciplina WHERE idDisciplina = " + id + ";";
         try {
             int ret = Main.con.createStatement().executeUpdate(sql);
@@ -63,11 +58,13 @@ public class ClienteDAOImpl implements EntidadeDAO{
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+        Main.fechaConexao();
         return false;
     }
 
     @Override
     public List<Cliente> listar() {
+        Main.abreConexao();
         List<Cliente> lista = new ArrayList<Cliente>();
         String sql = "SELECT * FROM Cliente;";
         try {
@@ -82,6 +79,7 @@ public class ClienteDAOImpl implements EntidadeDAO{
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+        Main.fechaConexao();
         return lista;
     }
 }
