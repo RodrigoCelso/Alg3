@@ -51,7 +51,7 @@ public class ClienteDAOImpl implements EntidadeDAO{
     @Override
     public boolean remover(int id) {
         Main.abreConexao();
-        String sql = "DELETE FROM Disciplina WHERE idDisciplina = " + id + ";";
+        String sql = "DELETE FROM Cliente WHERE idCliente = " + id + ";";
         try {
             int ret = Main.con.createStatement().executeUpdate(sql);
             return ret > 0;
@@ -73,6 +73,7 @@ public class ClienteDAOImpl implements EntidadeDAO{
                 Cliente temp = new Cliente();
                 temp.setIdCliente(rs.getInt("idCliente"));
                 temp.setNome(rs.getString("nome"));
+                temp.setTelefone(rs.getString("telefone"));
                 temp.setCpf(rs.getString("cpf"));
                 lista.add(temp);
             }
