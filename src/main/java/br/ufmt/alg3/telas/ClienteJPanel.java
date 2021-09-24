@@ -3,6 +3,10 @@ package br.ufmt.alg3.telas;
 import br.ufmt.alg3.dao.EntidadeDAO;
 import br.ufmt.alg3.entidades.Cliente;
 import br.ufmt.alg3.factory.ClienteFactory;
+import java.util.List;
+
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class ClienteJPanel extends javax.swing.JPanel {
     
@@ -13,6 +17,20 @@ public class ClienteJPanel extends javax.swing.JPanel {
      */
     public ClienteJPanel() {
         initComponents();
+        atualizaListaTabela();
+    }
+    
+    private void atualizaListaTabela(){
+        List<Cliente> tuplas = dao.listar();
+        DefaultTableModel dtm = (DefaultTableModel) jTableCliente.getModel();
+        int linhas = jTableCliente.getRowCount();
+        for(int i = linhas -1; i >= 0; i--){
+            dtm.removeRow(i);
+        }
+        for(Cliente cliente : tuplas){
+            Object[] obj = new Object[]{cliente.getIdCliente(),cliente.getNome(),cliente.getCpf(),cliente.getTelefone()};
+            dtm.addRow(obj);
+        }
     }
 
     /**
@@ -59,11 +77,11 @@ public class ClienteJPanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "IDCliente", "Abertura", "Fechamento", "Nome"
+                "IDCliente", "Nome", "CPF", "Telefone"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, true
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -87,8 +105,18 @@ public class ClienteJPanel extends javax.swing.JPanel {
         });
 
         jButtonEditar.setText("Editar");
+        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarActionPerformed(evt);
+            }
+        });
 
         jButtonExcluir.setText("Excluir");
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -166,22 +194,70 @@ public class ClienteJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        // TODO add your handling code here:
+        // Limpar campos
         jTextFieldIDCliente.setText("");
         jTextFieldCpf.setText("");
         jTextFieldTelefone.setText("");
         jTextFieldNome.setText("");
+        atualizaListaTabela();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        // TODO add your handling code here:
+        // Adicionar ou Alterar
         Cliente cliente = new Cliente();
         cliente.setNome(jTextFieldNome.getText());
         cliente.setCpf(jTextFieldCpf.getText());
         cliente.setTelefone(jTextFieldTelefone.getText());
-        dao.adicionar(cliente);
+        
+        try{
+            int id = Integer.parseInt(jTextFieldIDCliente.getText());
+            cliente.setIdCliente(id);
+            dao.atualizar(cliente);
+            JOptionPane.showMessageDialog(jButtonSalvar, "Atualizado com sucesso!");
+        }catch(NumberFormatException e){
+            dao.adicionar(cliente);
+            JOptionPane.showMessageDialog(jButtonSalvar, "Adicionado com sucesso!");
+        }
+        
         jButtonCancelarActionPerformed(evt);
     }//GEN-LAST:event_jButtonSalvarActionPerformed
+
+    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
+        // Editar
+        if(jTableCliente.getSelectedRowCount() == 1){
+            int linha = jTableCliente.getSelectedRow();
+            jTextFieldIDCliente.setText(jTableCliente.getValueAt(linha, 0) + "");
+            jTextFieldNome.setText(jTableCliente.getValueAt(linha, 1) + "");
+            jTextFieldCpf.setText(jTableCliente.getValueAt(linha, 2) + "");
+            jTextFieldTelefone.setText(jTableCliente.getValueAt(linha, 3) + "");
+            atualizaListaTabela();
+        }else{
+            if(jTableCliente.getSelectedRowCount() < 1){
+                JOptionPane.showMessageDialog(jTableCliente, "Selecione 1 linha");
+            }else if(jTableCliente.getSelectedRowCount() > 1){
+                JOptionPane.showMessageDialog(jTableCliente, "Selecione 1 linha apenas");
+            }
+        }
+    }//GEN-LAST:event_jButtonEditarActionPerformed
+
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+        // Excluir
+        try{
+            if(jTableCliente.getSelectedRowCount() >= 1){
+                int[] tuplas = jTableCliente.getSelectedRows();
+                for(int i = tuplas.length - 1; i >= 0; i--){
+                    int id = Integer.parseInt(jTableCliente.getValueAt(tuplas[i], 0) + "");
+                    dao.remover(id);
+                }
+                JOptionPane.showMessageDialog(jTableCliente, "Removido com sucesso");
+                jButtonCancelarActionPerformed(evt);
+            }else{
+                JOptionPane.showMessageDialog(jTableCliente, "Selecione ao menos 1 linha");
+            }
+        }catch(ArrayIndexOutOfBoundsException e){
+            JOptionPane.showMessageDialog(jTableCliente, "Erro 404! Linha não existe");
+        }
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
