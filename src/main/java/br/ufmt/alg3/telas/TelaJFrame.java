@@ -23,22 +23,38 @@ public class TelaJFrame extends javax.swing.JFrame {
         jPanelConteudo = new javax.swing.JPanel();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuCliente = new javax.swing.JMenu();
+        jMenuItemAtendente = new javax.swing.JMenuItem();
+        jMenuItemCaixa = new javax.swing.JMenuItem();
         jMenuItemCliente = new javax.swing.JMenuItem();
         jMenuItemEmpresa = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItemFabricante = new javax.swing.JMenuItem();
+        jMenuItemFarmaceutico = new javax.swing.JMenuItem();
+        jMenuItemLVP = new javax.swing.JMenuItem();
+        jMenuItemProduto = new javax.swing.JMenuItem();
+        jMenuItemServicos = new javax.swing.JMenuItem();
+        jMenuItemVenda = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanelConteudo.setLayout(new javax.swing.BoxLayout(jPanelConteudo, javax.swing.BoxLayout.LINE_AXIS));
 
         jMenuCliente.setText("File");
+
+        jMenuItemAtendente.setText("Atendente");
+        jMenuItemAtendente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAtendenteActionPerformed(evt);
+            }
+        });
+        jMenuCliente.add(jMenuItemAtendente);
+
+        jMenuItemCaixa.setText("Caixa");
+        jMenuItemCaixa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCaixaActionPerformed(evt);
+            }
+        });
+        jMenuCliente.add(jMenuItemCaixa);
 
         jMenuItemCliente.setText("Cliente");
         jMenuItemCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -51,29 +67,38 @@ public class TelaJFrame extends javax.swing.JFrame {
         jMenuItemEmpresa.setText("Empresa");
         jMenuCliente.add(jMenuItemEmpresa);
 
-        jMenuItem2.setText("jMenuItem2");
-        jMenuCliente.add(jMenuItem2);
+        jMenuItemFabricante.setText("Fabricante");
+        jMenuCliente.add(jMenuItemFabricante);
 
-        jMenuItem3.setText("jMenuItem3");
-        jMenuCliente.add(jMenuItem3);
+        jMenuItemFarmaceutico.setText("Farmaceutico");
+        jMenuItemFarmaceutico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemFarmaceuticoActionPerformed(evt);
+            }
+        });
+        jMenuCliente.add(jMenuItemFarmaceutico);
 
-        jMenuItem4.setText("jMenuItem4");
-        jMenuCliente.add(jMenuItem4);
+        jMenuItemLVP.setText("LVP");
+        jMenuCliente.add(jMenuItemLVP);
 
-        jMenuItem5.setText("jMenuItem5");
-        jMenuCliente.add(jMenuItem5);
+        jMenuItemProduto.setText("Produto");
+        jMenuItemProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemProdutoActionPerformed(evt);
+            }
+        });
+        jMenuCliente.add(jMenuItemProduto);
 
-        jMenuItem6.setText("jMenuItem6");
-        jMenuCliente.add(jMenuItem6);
+        jMenuItemServicos.setText("Servicos");
+        jMenuItemServicos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemServicosActionPerformed(evt);
+            }
+        });
+        jMenuCliente.add(jMenuItemServicos);
 
-        jMenuItem7.setText("jMenuItem7");
-        jMenuCliente.add(jMenuItem7);
-
-        jMenuItem8.setText("jMenuItem8");
-        jMenuCliente.add(jMenuItem8);
-
-        jMenuItem9.setText("jMenuItem9");
-        jMenuCliente.add(jMenuItem9);
+        jMenuItemVenda.setText("Venda");
+        jMenuCliente.add(jMenuItemVenda);
 
         jMenuBar.add(jMenuCliente);
 
@@ -93,6 +118,14 @@ public class TelaJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jMenuItemAtendenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAtendenteActionPerformed
+        // TODO add your handling code here:
+        jPanelConteudo.removeAll();
+        jPanelConteudo.add(new AtendenteJPanel());
+        jPanelConteudo.setVisible(false);
+        jPanelConteudo.setVisible(true);
+    }//GEN-LAST:event_jMenuItemAtendenteActionPerformed
+
     private void jMenuItemClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClienteActionPerformed
         // TODO add your handling code here:
         jPanelConteudo.removeAll();
@@ -100,6 +133,26 @@ public class TelaJFrame extends javax.swing.JFrame {
         jPanelConteudo.setVisible(false);
         jPanelConteudo.setVisible(true);
     }//GEN-LAST:event_jMenuItemClienteActionPerformed
+
+    private void jMenuItemCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCaixaActionPerformed
+        // TODO add your handling code here:
+        jPanelConteudo.removeAll();
+        jPanelConteudo.add(new CaixaJPanel());
+        jPanelConteudo.setVisible(false);
+        jPanelConteudo.setVisible(true);
+    }//GEN-LAST:event_jMenuItemCaixaActionPerformed
+
+    private void jMenuItemFarmaceuticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFarmaceuticoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemFarmaceuticoActionPerformed
+
+    private void jMenuItemProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemProdutoActionPerformed
+
+    private void jMenuItemServicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemServicosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemServicosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -139,16 +192,16 @@ public class TelaJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuCliente;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenuItem jMenuItemAtendente;
+    private javax.swing.JMenuItem jMenuItemCaixa;
     private javax.swing.JMenuItem jMenuItemCliente;
     private javax.swing.JMenuItem jMenuItemEmpresa;
+    private javax.swing.JMenuItem jMenuItemFabricante;
+    private javax.swing.JMenuItem jMenuItemFarmaceutico;
+    private javax.swing.JMenuItem jMenuItemLVP;
+    private javax.swing.JMenuItem jMenuItemProduto;
+    private javax.swing.JMenuItem jMenuItemServicos;
+    private javax.swing.JMenuItem jMenuItemVenda;
     private javax.swing.JPanel jPanelConteudo;
     // End of variables declaration//GEN-END:variables
 }

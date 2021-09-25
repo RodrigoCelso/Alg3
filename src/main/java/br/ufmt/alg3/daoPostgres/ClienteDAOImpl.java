@@ -1,5 +1,6 @@
 package br.ufmt.alg3.daoPostgres;
 
+import br.ufmt.alg3.dao.ClienteDAO;
 import br.ufmt.alg3.entidades.Cliente;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,10 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import br.ufmt.alg3.dao.EntidadeDAO;
 import br.ufmt.alg3.main.Main;
 
-public class ClienteDAOImpl implements EntidadeDAO{    
+public class ClienteDAOImpl implements ClienteDAO{    
     
     //Os métodos adicionar e atualizar estão utilizando o PreparedStatement para executar a Query ao banco
     @Override

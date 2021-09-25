@@ -1,10 +1,10 @@
 package br.ufmt.alg3.factory;
 
 import br.ufmt.alg3.daoPostgres.FabricanteDAOImpl;
-import br.ufmt.alg3.dao.EntidadeDAO;
+import br.ufmt.alg3.dao.FabricanteDAO;
 
 public class FabricanteFactory {
-    public static EntidadeDAO createDAO(){
+    public static FabricanteDAO createDAO(){
         return new FabricanteDAOImpl();
     }  
 }

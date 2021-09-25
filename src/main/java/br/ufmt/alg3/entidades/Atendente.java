@@ -5,12 +5,20 @@ public class Atendente {
     private Empresa empresa;
     private String nome;
 
-    public int getIdVendedor() {
+    public int getIdAtendente() {
         return idAtendente;
     }
 
-    public void setIdVendedor(int idVendedor) {
-        this.idAtendente = idVendedor;
+    public void setIdAtendente(int idAtendente) {
+        this.idAtendente = idAtendente;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 
     public String getNome() {

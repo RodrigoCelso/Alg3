@@ -1,18 +1,18 @@
 package br.ufmt.alg3.daoPostgres;
 
-import br.ufmt.alg3.dao.EntidadeDAO;
-import br.ufmt.alg3.entidades.Cliente;
+import br.ufmt.alg3.dao.FabricanteDAO;
+import br.ufmt.alg3.entidades.Fabricante;
 import java.util.List;
 
-public class FabricanteDAOImpl implements EntidadeDAO{
+public class FabricanteDAOImpl implements FabricanteDAO{
 
     @Override
-    public void adicionar(Cliente cliente) {
+    public void adicionar(Fabricante object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void atualizar(Cliente cliente) {
+    public void atualizar(Fabricante object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -22,7 +22,7 @@ public class FabricanteDAOImpl implements EntidadeDAO{
     }
 
     @Override
-    public List<Cliente> listar() {
+    public List<Fabricante> listar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

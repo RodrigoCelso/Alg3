@@ -1,10 +1,10 @@
 package br.ufmt.alg3.factory;
 
 import br.ufmt.alg3.daoPostgres.FarmaceuticoDAOImpl;
-import br.ufmt.alg3.dao.EntidadeDAO;
+import br.ufmt.alg3.dao.FarmaceuticoDAO;
 
 public class FarmaceuticoFactory {
-    public static EntidadeDAO createDAO(){
+    public static FarmaceuticoDAO createDAO(){
         return new FarmaceuticoDAOImpl();
     }
 }
