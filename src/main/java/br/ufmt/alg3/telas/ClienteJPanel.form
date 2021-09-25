@@ -131,6 +131,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldCpf">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="xxx.xxx.xxx-xx"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldTelefone">
     </Component>

@@ -17,10 +17,10 @@ public class ClienteJPanel extends javax.swing.JPanel {
      */
     public ClienteJPanel() {
         initComponents();
-        atualizaListaTabela();
+        atualizaTabela();
     }
     
-    private void atualizaListaTabela(){
+    private void atualizaTabela(){
         List<Cliente> tuplas = dao.listar();
         DefaultTableModel dtm = (DefaultTableModel) jTableCliente.getModel();
         int linhas = jTableCliente.getRowCount();
@@ -62,6 +62,8 @@ public class ClienteJPanel extends javax.swing.JPanel {
         jLabelCpf.setText("CPF:");
 
         jLabelTelefone.setText("Telefone:");
+
+        jTextFieldCpf.setText("xxx.xxx.xxx-xx");
 
         jLabelNome.setText("Nome:");
 
@@ -200,7 +202,7 @@ public class ClienteJPanel extends javax.swing.JPanel {
         jTextFieldCpf.setText("");
         jTextFieldTelefone.setText("");
         jTextFieldNome.setText("");
-        atualizaListaTabela();
+        atualizaTabela();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
@@ -231,7 +233,7 @@ public class ClienteJPanel extends javax.swing.JPanel {
             jTextFieldNome.setText(jTableCliente.getValueAt(linha, 1) + "");
             jTextFieldCpf.setText(jTableCliente.getValueAt(linha, 2) + "");
             jTextFieldTelefone.setText(jTableCliente.getValueAt(linha, 3) + "");
-            atualizaListaTabela();
+            atualizaTabela();
         }else{
             if(jTableCliente.getSelectedRowCount() < 1){
                 JOptionPane.showMessageDialog(jTableCliente, "Selecione 1 linha");

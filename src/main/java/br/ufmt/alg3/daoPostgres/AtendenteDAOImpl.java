@@ -2,6 +2,7 @@ package br.ufmt.alg3.daoPostgres;
 
 import br.ufmt.alg3.dao.AtendenteDAO;
 import br.ufmt.alg3.entidades.Atendente;
+import br.ufmt.alg3.entidades.Empresa;
 import br.ufmt.alg3.main.Main;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -62,13 +63,15 @@ public class AtendenteDAOImpl implements AtendenteDAO{
     public List<Atendente> listar() {
         Main.abreConexao();
         List<Atendente> lista = new ArrayList<Atendente>();
-        String sql = "SELECT * FROM Cliente;";
+        String sql = "SELECT * FROM Atendente;";
         try {
             ResultSet rs = Main.con.createStatement().executeQuery(sql);
             while(rs.next()){
                 Atendente temp = new Atendente();
+                Empresa temp2 = new Empresa();
                 temp.setIdAtendente(rs.getInt("idAtendente"));
-                temp.getEmpresa().setIdEmpresa(rs.getInt("idEmpresa"));
+                temp2.setIdEmpresa(rs.getInt("idEmpresa"));
+                temp.setEmpresa(temp2);
                 temp.setNome(rs.getString("nome"));
                 lista.add(temp);
             }

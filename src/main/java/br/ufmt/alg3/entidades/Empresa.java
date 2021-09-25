@@ -3,7 +3,7 @@ package br.ufmt.alg3.entidades;
 public class Empresa {
     private int idEmpresa;
     private String nome;
-    private char[] cnpj = new char[18];
+    private String cnpj;
 
     public int getIdEmpresa() {
         return idEmpresa;
@@ -21,11 +21,11 @@ public class Empresa {
         this.nome = nome;
     }
 
-    public char[] getCnpj() {
+    public String getCnpj() {
         return cnpj;
     }
 
-    public void setCnpj(char[] cnpj) {
+    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
     
