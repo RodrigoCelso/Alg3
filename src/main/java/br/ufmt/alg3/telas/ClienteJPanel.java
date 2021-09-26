@@ -63,8 +63,6 @@ public class ClienteJPanel extends javax.swing.JPanel {
 
         jLabelTelefone.setText("Telefone:");
 
-        jTextFieldCpf.setText("xxx.xxx.xxx-xx");
-
         jLabelNome.setText("Nome:");
 
         jLabelIDCliente.setText("ID Cliente:");
