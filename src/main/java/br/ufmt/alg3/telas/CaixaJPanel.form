@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <Properties>
     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
         <TitledBorder title="Caixa"/>
       </Border>
     </Property>
-    <Property name="toolTipText" type="java.lang.String" value=""/>
   </Properties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -24,49 +23,47 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jTextFieldNome" min="-2" pref="581" max="-2" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jTextFieldIDEmpresa" pref="282" max="32767" attributes="0"/>
-                  <Component id="jLabelIDEmpresa" min="-2" max="-2" attributes="0"/>
-                  <Component id="jScrollPane2" alignment="0" pref="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jButtonEditar" pref="81" max="32767" attributes="0"/>
-                          <Component id="jButtonSalvar" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jButtonExcluir" max="32767" attributes="0"/>
-                          <Component id="jButtonCancelar" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jTextFieldIDEmpresa" pref="282" max="32767" attributes="0"/>
+                      <Component id="jLabelIDEmpresa" min="-2" max="-2" attributes="0"/>
+                      <Component id="jScrollPane2" alignment="0" pref="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jButtonEditar" pref="81" max="32767" attributes="0"/>
+                              <Component id="jButtonSalvar" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jButtonExcluir" max="32767" attributes="0"/>
+                              <Component id="jButtonCancelar" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
+                  <Component id="jButtonConfirmar" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" pref="405" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabelIDCaixa" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldIDCaixa" alignment="0" min="-2" pref="198" max="-2" attributes="0"/>
                   <Component id="jLabelNome" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabelIDCaixa" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldIDCaixa" alignment="0" min="-2" pref="198" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabelHorarioAbertura" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldHorarioAbertura" alignment="0" min="-2" pref="222" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabelHorarioFechamento" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldHorarioFechamento" min="-2" pref="225" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Component id="jTextFieldNome" alignment="0" min="-2" pref="581" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="159" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabelHorarioAbertura" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldHorarioAbertura" alignment="0" min="-2" pref="222" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabelHorarioFechamento" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldHorarioFechamento" min="-2" pref="228" max="-2" attributes="0"/>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -79,15 +76,15 @@
                   <Component id="jLabelHorarioAbertura" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelHorarioFechamento" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jTextFieldIDCaixa" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldHorarioAbertura" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldHorarioFechamento" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabelNome" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Component id="jTextFieldNome" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -97,12 +94,14 @@
                       <Component id="jTextFieldIDEmpresa" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="112" max="-2" attributes="0"/>
-                      <EmptySpace pref="55" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jButtonConfirmar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="58" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jButtonEditar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButtonExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jButtonCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButtonSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -130,7 +129,7 @@
                 <Column editable="false" title="IDEmpresa" type="java.lang.Object"/>
                 <Column editable="false" title="Nome" type="java.lang.Object"/>
                 <Column editable="false" title="Hora Abertura" type="java.lang.Object"/>
-                <Column editable="true" title="Hora Fechamento" type="java.lang.Object"/>
+                <Column editable="false" title="Hora Fechamento" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -177,6 +176,8 @@
     <Component class="javax.swing.JTextField" name="jTextFieldIDCaixa">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
+        <Property name="horizontalAlignment" type="int" value="2"/>
+        <Property name="toolTipText" type="java.lang.String" value="ID Caixa"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelNome">
@@ -185,6 +186,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldNome">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="M&#xe1;ximo 120 Caracteres"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelIDEmpresa">
       <Properties>
@@ -194,6 +198,7 @@
     <Component class="javax.swing.JTextField" name="jTextFieldIDEmpresa">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
+        <Property name="toolTipText" type="java.lang.String" value="ID Empresa"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelHorarioAbertura">
@@ -201,29 +206,34 @@
         <Property name="text" type="java.lang.String" value="Hor&#xe1;rio de Abertura:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldHorarioAbertura">
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabelHorarioFechamento">
       <Properties>
         <Property name="text" type="java.lang.String" value="Hor&#xe1;rio de Fechamento:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldHorarioFechamento">
-    </Component>
     <Component class="javax.swing.JButton" name="jButtonExcluir">
       <Properties>
         <Property name="text" type="java.lang.String" value="Excluir"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonExcluirActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonSalvar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Salvar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSalvarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonEditar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Editar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEditarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonCancelar">
       <Properties>
@@ -244,7 +254,7 @@
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="2" rowCount="4">
-                <Column editable="true" title="IDEmpresa" type="java.lang.Object"/>
+                <Column editable="false" title="IDEmpresa" type="java.lang.Object"/>
                 <Column editable="false" title="Nome" type="java.lang.Object"/>
               </Table>
             </Property>
@@ -269,5 +279,34 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="jButtonConfirmar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Confirmar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonConfirmarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="jTextFieldHorarioAbertura">
+      <Properties>
+        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+          <Format subtype="0" type="2"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="2"/>
+        <Property name="toolTipText" type="java.lang.String" value="hh:mm:ss"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="jTextFieldHorarioFechamento">
+      <Properties>
+        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+          <Format subtype="0" type="2"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="2"/>
+        <Property name="toolTipText" type="java.lang.String" value="hh:mm:ss"/>
+      </Properties>
+      <AccessibilityProperties>
+        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
+      </AccessibilityProperties>
+    </Component>
   </SubComponents>
 </Form>

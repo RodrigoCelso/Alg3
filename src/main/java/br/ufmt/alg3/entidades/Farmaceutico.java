@@ -4,7 +4,7 @@ public class Farmaceutico {
     private int idFarmaceutico;
     private Empresa empresa;
     private String nome;
-    private char[] crf = new char[5];
+    private String crf;
 
     public int getIdFarmaceutico() {
         return idFarmaceutico;
@@ -30,11 +30,11 @@ public class Farmaceutico {
         this.nome = nome;
     }
 
-    public char[] getCrf() {
+    public String getCrf() {
         return crf;
     }
 
-    public void setCrf(char[] crf) {
+    public void setCrf(String crf) {
         this.crf = crf;
     }
     

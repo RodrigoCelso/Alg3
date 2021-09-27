@@ -1,12 +1,53 @@
 package br.ufmt.alg3.telas;
 
+import br.ufmt.alg3.dao.CaixaDAO;
+import br.ufmt.alg3.dao.EmpresaDAO;
+import br.ufmt.alg3.entidades.Caixa;
+import br.ufmt.alg3.entidades.Empresa;
+import br.ufmt.alg3.factory.CaixaFactory;
+import br.ufmt.alg3.factory.EmpresaFactory;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 public class CaixaJPanel extends javax.swing.JPanel {
 
+    CaixaDAO dao = CaixaFactory.createDAO();
+    EmpresaDAO daoEmpresa = EmpresaFactory.createDAO();
+    
     /**
      * Creates new form CaixaJPanel
      */
     public CaixaJPanel() {
         initComponents();
+        atualizaTabela();
+        atualizaTabelaEmpresa();
+    }
+    
+    private void atualizaTabela(){
+        int linhas = jTableCaixa.getRowCount();
+        DefaultTableModel dtm = (DefaultTableModel) jTableCaixa.getModel();
+        List<Caixa> tuplas = dao.listar();
+        for(int i = linhas - 1; i >= 0; i--){
+            dtm.removeRow(i);
+        }
+        for(Caixa caixa : tuplas){
+            Object[] obj = new Object[]{caixa.getIdCaixa(),caixa.getEmpresa().getIdEmpresa(),caixa.getNome(),caixa.getHoraAbertura(),caixa.getHoraFechamento()};
+            dtm.addRow(obj);
+        }
+    }
+    
+    private void atualizaTabelaEmpresa(){
+        int linhas = jTableIDEmpresa.getRowCount();
+        DefaultTableModel dtm = (DefaultTableModel) jTableIDEmpresa.getModel();
+        List<Empresa> tuplas = daoEmpresa.listar();
+        for(int i = linhas - 1; i >= 0; i--){
+            dtm.removeRow(i);
+        }
+        for(Empresa empresa : tuplas){
+            Object[] obj = new Object[]{empresa.getIdEmpresa(),empresa.getNome()};
+            dtm.addRow(obj);
+        }
     }
 
     /**
@@ -27,18 +68,18 @@ public class CaixaJPanel extends javax.swing.JPanel {
         jLabelIDEmpresa = new javax.swing.JLabel();
         jTextFieldIDEmpresa = new javax.swing.JTextField();
         jLabelHorarioAbertura = new javax.swing.JLabel();
-        jTextFieldHorarioAbertura = new javax.swing.JTextField();
         jLabelHorarioFechamento = new javax.swing.JLabel();
-        jTextFieldHorarioFechamento = new javax.swing.JTextField();
         jButtonExcluir = new javax.swing.JButton();
         jButtonSalvar = new javax.swing.JButton();
         jButtonEditar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableIDEmpresa = new javax.swing.JTable();
+        jButtonConfirmar = new javax.swing.JButton();
+        jTextFieldHorarioAbertura = new javax.swing.JFormattedTextField();
+        jTextFieldHorarioFechamento = new javax.swing.JFormattedTextField();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Caixa"));
-        setToolTipText("");
 
         jTableCaixa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -52,7 +93,7 @@ public class CaixaJPanel extends javax.swing.JPanel {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -64,22 +105,42 @@ public class CaixaJPanel extends javax.swing.JPanel {
         jLabelIDCaixa.setText("ID Caixa:");
 
         jTextFieldIDCaixa.setEditable(false);
+        jTextFieldIDCaixa.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jTextFieldIDCaixa.setToolTipText("ID Caixa");
 
         jLabelNome.setText("Nome:");
+
+        jTextFieldNome.setToolTipText("Máximo 120 Caracteres");
 
         jLabelIDEmpresa.setText("ID Empresa:");
 
         jTextFieldIDEmpresa.setEditable(false);
+        jTextFieldIDEmpresa.setToolTipText("ID Empresa");
 
         jLabelHorarioAbertura.setText("Horário de Abertura:");
 
         jLabelHorarioFechamento.setText("Horário de Fechamento:");
 
         jButtonExcluir.setText("Excluir");
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirActionPerformed(evt);
+            }
+        });
 
         jButtonSalvar.setText("Salvar");
+        jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalvarActionPerformed(evt);
+            }
+        });
 
         jButtonEditar.setText("Editar");
+        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarActionPerformed(evt);
+            }
+        });
 
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -100,7 +161,7 @@ public class CaixaJPanel extends javax.swing.JPanel {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -109,43 +170,57 @@ public class CaixaJPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(jTableIDEmpresa);
 
+        jButtonConfirmar.setText("Confirmar");
+        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarActionPerformed(evt);
+            }
+        });
+
+        jTextFieldHorarioAbertura.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance())));
+        jTextFieldHorarioAbertura.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jTextFieldHorarioAbertura.setToolTipText("hh:mm:ss");
+
+        jTextFieldHorarioFechamento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance())));
+        jTextFieldHorarioFechamento.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jTextFieldHorarioFechamento.setToolTipText("hh:mm:ss");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextFieldIDEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
-                    .addComponent(jLabelIDEmpresa)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonEditar, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
-                            .addComponent(jButtonSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonCancelar))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jTextFieldIDEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+                        .addComponent(jLabelIDEmpresa)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jButtonEditar, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+                                .addComponent(jButtonSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jButtonExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonCancelar))))
+                    .addComponent(jButtonConfirmar))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelNome)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelIDCaixa)
-                            .addComponent(jTextFieldIDCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelHorarioAbertura)
-                            .addComponent(jTextFieldHorarioAbertura, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelHorarioFechamento)
-                            .addComponent(jTextFieldHorarioFechamento, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabelIDCaixa)
+                    .addComponent(jTextFieldIDCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelNome))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelHorarioAbertura)
+                    .addComponent(jTextFieldHorarioAbertura, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelHorarioFechamento)
+                    .addComponent(jTextFieldHorarioFechamento, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,7 +237,7 @@ public class CaixaJPanel extends javax.swing.JPanel {
                     .addComponent(jTextFieldHorarioFechamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelNome)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
                 .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,16 +247,20 @@ public class CaixaJPanel extends javax.swing.JPanel {
                         .addComponent(jTextFieldIDEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonConfirmar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonEditar)
                             .addComponent(jButtonExcluir))
-                        .addGap(62, 62, 62)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonCancelar)
                             .addComponent(jButtonSalvar)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
         );
+
+        jTextFieldHorarioFechamento.getAccessibleContext().setAccessibleName("");
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
@@ -191,11 +270,87 @@ public class CaixaJPanel extends javax.swing.JPanel {
         jTextFieldHorarioAbertura.setText("");
         jTextFieldHorarioFechamento.setText("");
         jTextFieldNome.setText("");
+        atualizaTabela();
+        atualizaTabelaEmpresa();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
+        // Adicionar ou alterar
+        Caixa caixa = new Caixa();
+        Empresa empresa = new Empresa();
+        try{
+            empresa.setIdEmpresa(Integer.parseInt(jTextFieldIDEmpresa.getText()));
+            caixa.setEmpresa(empresa);
+            caixa.setHoraAbertura(jTextFieldHorarioAbertura.getText());
+            caixa.setHoraFechamento(jTextFieldHorarioFechamento.getText());
+            caixa.setNome(jTextFieldNome.getText());
+            
+            try{
+                caixa.setIdCaixa(Integer.parseInt(jTextFieldIDCaixa.getText()));
+                dao.atualizar(caixa);
+                jButtonCancelarActionPerformed(evt);
+                JOptionPane.showMessageDialog(jTableCaixa, "Atualizado com sucesso!");
+            }catch(NumberFormatException e){
+                dao.adicionar(caixa);
+                jButtonCancelarActionPerformed(evt);
+                JOptionPane.showMessageDialog(jTableCaixa, "Adicionado com sucesso!");
+            }
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(jTableIDEmpresa,"Adicione uma empresa");
+        }
+    }//GEN-LAST:event_jButtonSalvarActionPerformed
+
+    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
+        // Editar
+        if(jTableCaixa.getSelectedRowCount() == 1){
+            int linha = jTableCaixa.getSelectedRow();
+            jTextFieldIDCaixa.setText(jTableCaixa.getValueAt(linha, 0) + "");
+            jTextFieldIDEmpresa.setText(jTableCaixa.getValueAt(linha, 1) + "");
+            jTextFieldNome.setText(jTableCaixa.getValueAt(linha, 2) + "");
+            jTextFieldHorarioAbertura.setText(jTableCaixa.getValueAt(linha, 3) + "");
+            jTextFieldHorarioFechamento.setText(jTableCaixa.getValueAt(linha, 4) + "");
+            atualizaTabela();
+            atualizaTabelaEmpresa();
+        }else if(jTableCaixa.getSelectedRowCount() < 1){
+            JOptionPane.showMessageDialog(jTableCaixa, "Selecione ao menos 1 linha");
+        }else{
+            JOptionPane.showMessageDialog(jTableCaixa, "Selecione 1 linha apenas");
+        }
+    }//GEN-LAST:event_jButtonEditarActionPerformed
+
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+        // Excluir
+        if(jTableCaixa.getSelectedRowCount() >= 1){
+            int[] tuplas = jTableCaixa.getSelectedRows();
+            for(int i = tuplas.length - 1; i >= 0; i--){
+                int id = Integer.parseInt(jTableCaixa.getValueAt(tuplas[i], 0) + "");
+                dao.remover(id);
+            }
+            jButtonCancelarActionPerformed(evt);
+            JOptionPane.showMessageDialog(jTableCaixa, "Excluído com sucesso!");
+        }else{
+            JOptionPane.showMessageDialog(jTableCaixa, "Selecione ao menos 1 linha");
+        }
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
+
+    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+        // Confirmar
+        if(jTableIDEmpresa.getSelectedRowCount() == 1){
+            int linha = jTableIDEmpresa.getSelectedRow();
+            jTextFieldIDEmpresa.setText(jTableIDEmpresa.getValueAt(linha, 0) + "");
+            atualizaTabela();
+            atualizaTabelaEmpresa();
+        }else if(jTableCaixa.getSelectedRowCount() < 1){
+            JOptionPane.showMessageDialog(jTableIDEmpresa, "Selecione ao menos 1 linha");
+        }else{
+            JOptionPane.showMessageDialog(jTableIDEmpresa, "Selecione 1 linha apenas");
+        }
+    }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonExcluir;
     private javax.swing.JButton jButtonSalvar;
@@ -208,8 +363,8 @@ public class CaixaJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableCaixa;
     private javax.swing.JTable jTableIDEmpresa;
-    private javax.swing.JTextField jTextFieldHorarioAbertura;
-    private javax.swing.JTextField jTextFieldHorarioFechamento;
+    private javax.swing.JFormattedTextField jTextFieldHorarioAbertura;
+    private javax.swing.JFormattedTextField jTextFieldHorarioFechamento;
     private javax.swing.JTextField jTextFieldIDCaixa;
     private javax.swing.JTextField jTextFieldIDEmpresa;
     private javax.swing.JTextField jTextFieldNome;

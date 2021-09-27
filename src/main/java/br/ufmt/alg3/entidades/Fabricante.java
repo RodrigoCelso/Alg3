@@ -2,7 +2,7 @@ package br.ufmt.alg3.entidades;
 
 public class Fabricante {
     private int idFabricante;
-    private char[] cnpj = new char[18];
+    private String cnpj;
     private String nome;
 
     public int getIdFabricante() {
@@ -13,11 +13,11 @@ public class Fabricante {
         this.idFabricante = idFabricante;
     }
 
-    public char[] getCnpj() {
+    public String getCnpj() {
         return cnpj;
     }
 
-    public void setCnpj(char[] cnpj) {
+    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
 

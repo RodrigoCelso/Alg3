@@ -2,6 +2,7 @@ package br.ufmt.alg3.daoPostgres;
 
 import br.ufmt.alg3.dao.CaixaDAO;
 import br.ufmt.alg3.entidades.Caixa;
+import br.ufmt.alg3.entidades.Empresa;
 import br.ufmt.alg3.main.Main;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +17,7 @@ public class CaixaDAOImpl implements CaixaDAO{
     @Override
     public void adicionar(Caixa caixa) {
         Main.abreConexao();
-        String sql = "INSERT INTO Caixa(nome,cpf,telefone) VALUES (?,?,?);";
+        String sql = "INSERT INTO Caixa(idEmpresa,nome,horaAbertura,horaFechamento) VALUES (?,?,?,?);";
         try {
             PreparedStatement pstm = Main.con.prepareStatement(sql);
             pstm.setInt(1,caixa.getEmpresa().getIdEmpresa());
@@ -40,6 +41,7 @@ public class CaixaDAOImpl implements CaixaDAO{
             pstm.setString(2,caixa.getNome());
             pstm.setString(3,caixa.getHoraAbertura());
             pstm.setString(4,caixa.getHoraFechamento());
+            pstm.setInt(5,caixa.getIdCaixa());
             pstm.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
@@ -70,8 +72,10 @@ public class CaixaDAOImpl implements CaixaDAO{
             ResultSet rs = Main.con.createStatement().executeQuery(sql);
             while(rs.next()){
                 Caixa temp = new Caixa();
+                Empresa empresaTemp = new Empresa();
                 temp.setIdCaixa(rs.getInt("idCaixa"));
-                temp.getEmpresa().setIdEmpresa(rs.getInt("idEmpresa"));
+                empresaTemp.setIdEmpresa(rs.getInt("idEmpresa"));
+                temp.setEmpresa(empresaTemp);
                 temp.setNome(rs.getString("nome"));
                 temp.setHoraAbertura(rs.getString("horaAbertura"));
                 temp.setHoraFechamento(rs.getString("horaFechamento"));

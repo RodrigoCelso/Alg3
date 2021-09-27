@@ -1,23 +1,55 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.ufmt.alg3.telas;
 
-/**
- *
- * @author rodrigo
- */
+import br.ufmt.alg3.dao.EmpresaDAO;
+import br.ufmt.alg3.dao.FarmaceuticoDAO;
+import br.ufmt.alg3.entidades.Empresa;
+import br.ufmt.alg3.entidades.Farmaceutico;
+import br.ufmt.alg3.factory.EmpresaFactory;
+import br.ufmt.alg3.factory.FarmaceuticoFactory;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 public class FarmaceuticoJPanel extends javax.swing.JPanel {
 
+    private FarmaceuticoDAO dao = FarmaceuticoFactory.createDAO();
+    private EmpresaDAO daoEmp = EmpresaFactory.createDAO();
+    
     /**
      * Creates new form FarmaceuticoJPanel
      */
     public FarmaceuticoJPanel() {
         initComponents();
+        atualizaTabela();
+        atualizaTabelaEmpresa();
     }
-
+    
+    private void atualizaTabela(){
+        List<Farmaceutico> tuplas = dao.listar();
+        DefaultTableModel dtm = (DefaultTableModel) jTableFarmaceutico.getModel();
+        int linhas = jTableFarmaceutico.getRowCount();
+        for(int i = linhas - 1; i >= 0; i--){
+            dtm.removeRow(i);
+        }
+        for(Farmaceutico farmaceutico : tuplas){
+            Object[] obj = new Object[]{farmaceutico.getIdFarmaceutico(),farmaceutico.getEmpresa().getIdEmpresa(),farmaceutico.getNome(),farmaceutico.getCrf()};
+            dtm.addRow(obj);
+        }
+    }
+    
+    private void atualizaTabelaEmpresa(){
+        List<Empresa> tuplas = daoEmp.listar();
+        DefaultTableModel dtm = (DefaultTableModel) jTableIDEmpresa.getModel();
+        int linhas = jTableIDEmpresa.getRowCount();
+        for(int i = linhas -1; i >= 0; i--){
+            dtm.removeRow(i);
+        }
+        for(Empresa empresa: tuplas){
+            Object[] obj = new Object[]{empresa.getIdEmpresa(), empresa.getNome()};
+            dtm.addRow(obj);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,25 +59,27 @@ public class FarmaceuticoJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane = new javax.swing.JScrollPane();
+        jTableFarmaceutico = new javax.swing.JTable();
+        jLabelIDFarmaceutico = new javax.swing.JLabel();
+        jTextFieldIDFarmaceutico = new javax.swing.JTextField();
+        jLabelCRF = new javax.swing.JLabel();
+        jLabelNome = new javax.swing.JLabel();
+        jTextFieldNome = new javax.swing.JTextField();
+        jLabelEmpresa = new javax.swing.JLabel();
+        jTextFieldIDEmpresa = new javax.swing.JTextField();
+        jButtonCancelar = new javax.swing.JButton();
+        jButtonExcluir = new javax.swing.JButton();
+        jButtonSalvar = new javax.swing.JButton();
+        jButtonEditar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        jTableIDEmpresa = new javax.swing.JTable();
+        jButtonConfirmar = new javax.swing.JButton();
+        jTextFieldCRF = new javax.swing.JFormattedTextField();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Farmacêutico"));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableFarmaceutico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -53,130 +87,273 @@ public class FarmaceuticoJPanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "IDFarmaceutico", "IDEmpresa", "Nome", "CRF"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
 
-        jLabel1.setText("ID Farmacêutico:");
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane.setViewportView(jTableFarmaceutico);
 
-        jLabel2.setText("CRF:");
+        jLabelIDFarmaceutico.setText("ID Farmacêutico:");
 
-        jLabel3.setText("Nome:");
+        jTextFieldIDFarmaceutico.setEditable(false);
 
-        jLabel4.setText("Empresa:");
+        jLabelCRF.setText("CRF:");
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        jLabelNome.setText("Nome:");
+
+        jLabelEmpresa.setText("Empresa:");
+
+        jTextFieldIDEmpresa.setEditable(false);
+
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                jButtonCancelarActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Cancelar");
+        jButtonExcluir.setText("Excluir");
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Excluir");
+        jButtonSalvar.setText("Salvar");
+        jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalvarActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Salvar");
+        jButtonEditar.setText("Editar");
+        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Editar");
+        jTableIDEmpresa.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "ID Empresa", "Nome"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/drogaria logo.png"))); // NOI18N
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTableIDEmpresa);
+
+        jButtonConfirmar.setText("Confirmar");
+        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarActionPerformed(evt);
+            }
+        });
+
+        try {
+            jTextFieldCRF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField4)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
-                                .addComponent(jButton1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldIDFarmaceutico, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelIDFarmaceutico))
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelCRF)
+                    .addComponent(jTextFieldCRF, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelEmpresa)
+                    .addComponent(jTextFieldIDEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonConfirmar)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(32, 32, 32)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel3)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(86, 86, 86)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelNome))
+                .addGap(0, 124, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabelIDFarmaceutico)
+                    .addComponent(jLabelCRF))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldIDFarmaceutico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldCRF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
+                .addComponent(jLabelNome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addComponent(jLabelEmpresa)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton4)
-                            .addComponent(jButton2))
-                        .addGap(41, 41, 41)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton3))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jTextFieldIDEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonConfirmar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButtonEditar)
+                                .addGap(41, 41, 41)
+                                .addComponent(jButtonSalvar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButtonExcluir)
+                                .addGap(41, 41, 41)
+                                .addComponent(jButtonCancelar))))
+                    .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        // Limpar campos
+        jTextFieldIDFarmaceutico.setText("");
+        jTextFieldIDEmpresa.setText("");
+        jTextFieldNome.setText("");
+        jTextFieldCRF.setText("");
+        atualizaTabela();
+        atualizaTabelaEmpresa();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
+        // Adicionar ou Alterar
+        Farmaceutico farmaceutico = new Farmaceutico();
+        Empresa empresa = new Empresa();
+        try{
+            empresa.setIdEmpresa(Integer.parseInt(jTextFieldIDEmpresa.getText()));
+            farmaceutico.setEmpresa(empresa);
+            farmaceutico.setNome(jTextFieldNome.getText());
+            farmaceutico.setCrf(jTextFieldCRF.getText());
+            try{
+                int id = Integer.parseInt(jTextFieldIDFarmaceutico.getText());
+                farmaceutico.setIdFarmaceutico(id);
+                dao.atualizar(farmaceutico);
+                JOptionPane.showMessageDialog(jTableFarmaceutico, "Atualizado com sucesso!");
+            }catch(NumberFormatException e){
+                dao.adicionar(farmaceutico);
+                JOptionPane.showMessageDialog(jTableFarmaceutico, "Adicionado com sucesso!");
+            }
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(jTableIDEmpresa, "Adicione uma empresa");
+        }
+        jButtonCancelarActionPerformed(evt);
+    }//GEN-LAST:event_jButtonSalvarActionPerformed
+
+    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
+        // Editar
+        if(jTableFarmaceutico.getSelectedRowCount() == 1){
+            int linha = jTableFarmaceutico.getSelectedRow();
+            jTextFieldIDFarmaceutico.setText(jTableFarmaceutico.getValueAt(linha, 0) + "");
+            jTextFieldIDEmpresa.setText(jTableFarmaceutico.getValueAt(linha, 1) + "");
+            jTextFieldNome.setText(jTableFarmaceutico.getValueAt(linha, 2) + "");
+            jTextFieldCRF.setText(jTableFarmaceutico.getValueAt(linha, 3) + "");
+            atualizaTabela();
+            atualizaTabelaEmpresa();
+        }else{
+            if(jTableFarmaceutico.getSelectedRowCount() < 1){
+                JOptionPane.showMessageDialog(jTableFarmaceutico, "Selecione ao menos 1 linha");
+            }else{
+                JOptionPane.showMessageDialog(jTableFarmaceutico, "Selecione 1 linha apenas");
+            }
+        }
+    }//GEN-LAST:event_jButtonEditarActionPerformed
+
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+        // Excluir
+        try{
+            if(jTableFarmaceutico.getSelectedRowCount() >= 1){
+                int[] tuplas = jTableFarmaceutico.getSelectedRows();
+                for(int i = tuplas.length - 1; i >= 0; i--){
+                    int id = Integer.parseInt(jTableFarmaceutico.getValueAt(tuplas[i], 0) + "");
+                    dao.remover(id);
+                }
+                JOptionPane.showMessageDialog(jTableFarmaceutico, "Removido com sucesso");
+                jButtonCancelarActionPerformed(evt);
+            }else{
+                JOptionPane.showMessageDialog(jTableFarmaceutico, "Selecione ao menos 1 linha");
+            }
+        }catch(ArrayIndexOutOfBoundsException e){
+            JOptionPane.showMessageDialog(jTableFarmaceutico, "Erro 404! Linha não existe");
+        }
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
+
+    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+        // Confirmar
+        if(jTableIDEmpresa.getSelectedRowCount() == 1){
+            int linha = jTableIDEmpresa.getSelectedRow();
+            jTextFieldIDEmpresa.setText(jTableIDEmpresa.getValueAt(linha, 0) + "");
+            atualizaTabela();
+            atualizaTabelaEmpresa();
+        }else{
+            if(jTableIDEmpresa.getSelectedRowCount() < 1){
+                JOptionPane.showMessageDialog(jTableIDEmpresa, "Selecione 1 linha");
+            }else if(jTableIDEmpresa.getSelectedRowCount() > 1){
+                JOptionPane.showMessageDialog(jTableIDEmpresa, "Selecione 1 linha apenas");
+            }
+        }
+    }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonConfirmar;
+    private javax.swing.JButton jButtonEditar;
+    private javax.swing.JButton jButtonExcluir;
+    private javax.swing.JButton jButtonSalvar;
+    private javax.swing.JLabel jLabelCRF;
+    private javax.swing.JLabel jLabelEmpresa;
+    private javax.swing.JLabel jLabelIDFarmaceutico;
+    private javax.swing.JLabel jLabelNome;
+    private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTable jTableFarmaceutico;
+    private javax.swing.JTable jTableIDEmpresa;
+    private javax.swing.JFormattedTextField jTextFieldCRF;
+    private javax.swing.JTextField jTextFieldIDEmpresa;
+    private javax.swing.JTextField jTextFieldIDFarmaceutico;
+    private javax.swing.JTextField jTextFieldNome;
     // End of variables declaration//GEN-END:variables
 }

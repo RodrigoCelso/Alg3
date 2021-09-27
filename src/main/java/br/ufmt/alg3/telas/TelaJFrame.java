@@ -39,6 +39,11 @@ public class TelaJFrame extends javax.swing.JFrame {
         jPanelConteudo.setLayout(new javax.swing.BoxLayout(jPanelConteudo, javax.swing.BoxLayout.LINE_AXIS));
 
         jMenu.setText("File");
+        jMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuActionPerformed(evt);
+            }
+        });
 
         jMenuItemAtendente.setText("Atendente");
         jMenuItemAtendente.addActionListener(new java.awt.event.ActionListener() {
@@ -73,6 +78,11 @@ public class TelaJFrame extends javax.swing.JFrame {
         jMenu.add(jMenuItemEmpresa);
 
         jMenuItemFabricante.setText("Fabricante");
+        jMenuItemFabricante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemFabricanteActionPerformed(evt);
+            }
+        });
         jMenu.add(jMenuItemFabricante);
 
         jMenuItemFarmaceutico.setText("Farmaceutico");
@@ -124,7 +134,7 @@ public class TelaJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemAtendenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAtendenteActionPerformed
-        // TODO add your handling code here:
+        // Atendente
         jPanelConteudo.removeAll();
         jPanelConteudo.add(new AtendenteJPanel());
         jPanelConteudo.setVisible(false);
@@ -132,7 +142,7 @@ public class TelaJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemAtendenteActionPerformed
 
     private void jMenuItemClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClienteActionPerformed
-        // TODO add your handling code here:
+        // Cliente
         jPanelConteudo.removeAll();
         jPanelConteudo.add(new ClienteJPanel());
         jPanelConteudo.setVisible(false);
@@ -140,7 +150,7 @@ public class TelaJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemClienteActionPerformed
 
     private void jMenuItemCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCaixaActionPerformed
-        // TODO add your handling code here:
+        // Caixa
         jPanelConteudo.removeAll();
         jPanelConteudo.add(new CaixaJPanel());
         jPanelConteudo.setVisible(false);
@@ -148,7 +158,11 @@ public class TelaJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemCaixaActionPerformed
 
     private void jMenuItemFarmaceuticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFarmaceuticoActionPerformed
-        // TODO add your handling code here:
+        // Farmaceutico
+        jPanelConteudo.removeAll();
+        jPanelConteudo.add(new FarmaceuticoJPanel());
+        jPanelConteudo.setVisible(false);
+        jPanelConteudo.setVisible(true);
     }//GEN-LAST:event_jMenuItemFarmaceuticoActionPerformed
 
     private void jMenuItemProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemProdutoActionPerformed
@@ -160,12 +174,24 @@ public class TelaJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemServicosActionPerformed
 
     private void jMenuItemEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEmpresaActionPerformed
-        // TODO add your handling code here:
+        // Empresa
         jPanelConteudo.removeAll();
         jPanelConteudo.add(new EmpresaJPanel());
         jPanelConteudo.setVisible(false);
         jPanelConteudo.setVisible(true);
     }//GEN-LAST:event_jMenuItemEmpresaActionPerformed
+
+    private void jMenuItemFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFabricanteActionPerformed
+        // Fabricante
+        jPanelConteudo.removeAll();
+        jPanelConteudo.add(new FabricanteJPanel());
+        jPanelConteudo.setVisible(false);
+        jPanelConteudo.setVisible(true);
+    }//GEN-LAST:event_jMenuItemFabricanteActionPerformed
+
+    private void jMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuActionPerformed
 
     /**
      * @param args the command line arguments

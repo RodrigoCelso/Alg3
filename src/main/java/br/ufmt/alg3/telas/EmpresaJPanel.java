@@ -3,6 +3,7 @@ package br.ufmt.alg3.telas;
 import br.ufmt.alg3.dao.EmpresaDAO;
 import br.ufmt.alg3.entidades.Empresa;
 import br.ufmt.alg3.factory.EmpresaFactory;
+import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -215,14 +216,19 @@ public class EmpresaJPanel extends javax.swing.JPanel {
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         // Excluir
+        boolean removido = false;
         try{
             if(jTableEmpresa.getSelectedRowCount() >= 1){
                 int[] tuplas = jTableEmpresa.getSelectedRows();
                 for(int i = tuplas.length - 1; i >= 0; i--){
                     int id = Integer.parseInt(jTableEmpresa.getValueAt(tuplas[i], 0) + "");
-                    dao.remover(id);
+                    removido = dao.remover(id);
                 }
-                JOptionPane.showMessageDialog(jTableEmpresa, "Removido com sucesso");
+                if(removido == true){
+                    JOptionPane.showMessageDialog(jTableEmpresa, "Removido com sucesso");
+                }else{
+                    JOptionPane.showMessageDialog(jTableEmpresa, "Empresa vinculada a outra tupla");
+                }
                 jButtonCancelarActionPerformed(evt);
             }else{
                 JOptionPane.showMessageDialog(jTableEmpresa, "Selecione ao menos 1 linha");

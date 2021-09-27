@@ -52,7 +52,6 @@ public class EmpresaDAOImpl implements EmpresaDAO{
             int ret = Main.con.createStatement().executeUpdate(sql);
             return ret > 0;
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         Main.fechaConexao();
         return false;
