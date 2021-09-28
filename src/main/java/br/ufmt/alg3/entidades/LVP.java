@@ -3,8 +3,8 @@ package br.ufmt.alg3.entidades;
 public class LVP {
     // Solicita foi alterado para Lista de Vendas de Produtos (LVP)
     private int idLvp;
-    private Cliente cliente;
     private Venda venda;
+    private Produto produto;
     private int quantidade;
 
     public int getIdLvp() {
@@ -15,12 +15,12 @@ public class LVP {
         this.idLvp = idLvp;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public Produto getProduto() {
+        return produto;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
 
     public Venda getVenda() {

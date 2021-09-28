@@ -4,7 +4,7 @@ public class Venda {
     private int idVenda;
     private boolean entrega;
     private double valor;
-    private char[] modoPagamento = new char[20];
+    private String modoPagamento;
     private String data;
 
     public int getIdVenda() {
@@ -31,11 +31,11 @@ public class Venda {
         this.valor = valor;
     }
 
-    public char[] getModoPagamento() {
+    public String getModoPagamento() {
         return modoPagamento;
     }
 
-    public void setModoPagamento(char[] modoPagamento) {
+    public void setModoPagamento(String modoPagamento) {
         this.modoPagamento = modoPagamento;
     }
 

@@ -3,7 +3,6 @@ package br.ufmt.alg3.telas;
 import br.ufmt.alg3.dao.EmpresaDAO;
 import br.ufmt.alg3.entidades.Empresa;
 import br.ufmt.alg3.factory.EmpresaFactory;
-import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -181,9 +180,6 @@ public class EmpresaJPanel extends javax.swing.JPanel {
         Empresa empresa = new Empresa();
         empresa.setNome(jTextFieldNome.getText());
         empresa.setCnpj(jTextFieldCNPJ.getText());
-        
-        System.out.println(empresa.getNome() +" "+ empresa.getCnpj());
-        
         try{
             int id = Integer.parseInt(jTextFieldIDEmpresa.getText());
             empresa.setIdEmpresa(id);

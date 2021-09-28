@@ -340,7 +340,7 @@ public class CaixaJPanel extends javax.swing.JPanel {
             jTextFieldIDEmpresa.setText(jTableIDEmpresa.getValueAt(linha, 0) + "");
             atualizaTabela();
             atualizaTabelaEmpresa();
-        }else if(jTableCaixa.getSelectedRowCount() < 1){
+        }else if(jTableIDEmpresa.getSelectedRowCount() < 1){
             JOptionPane.showMessageDialog(jTableIDEmpresa, "Selecione ao menos 1 linha");
         }else{
             JOptionPane.showMessageDialog(jTableIDEmpresa, "Selecione 1 linha apenas");
